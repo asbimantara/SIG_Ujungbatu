@@ -8,19 +8,6 @@ Sistem Informasi Geografis (SIG) berbasis web untuk Desa Ujungbatu, Kecamatan Je
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css)
 ![Leaflet](https://img.shields.io/badge/Leaflet-1.9-green?logo=leaflet)
 
-## 📸 Screenshot
-
-### Halaman Welcome
-Halaman selamat datang dengan pilihan masuk sebagai Pengunjung atau Admin.
-
-### Peta Interaktif
-Peta dengan multi-layer, legenda warna, dan fitur filter kategori fasilitas.
-
-### Dashboard Statistik
-Visualisasi data statistik desa termasuk jumlah fasilitas dan penggunaan lahan.
-
----
-
 ## ✨ Fitur Utama
 
 ### 🗺️ Peta Interaktif
