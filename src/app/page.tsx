@@ -1,63 +1,76 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+
+export default function WelcomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 text-slate-100">
+      {/* Background gradient */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.2),transparent_40%),radial-gradient(circle_at_70%_80%,rgba(56,189,248,0.15),transparent_35%),radial-gradient(circle_at_50%_50%,rgba(148,163,184,0.1),transparent_50%)]" />
+      
+      {/* Animated background shapes */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-20 top-1/4 h-72 w-72 animate-pulse rounded-full bg-indigo-500/10 blur-3xl" />
+        <div className="absolute -right-20 bottom-1/4 h-96 w-96 animate-pulse rounded-full bg-cyan-500/10 blur-3xl" style={{ animationDelay: "1s" }} />
+      </div>
+
+      <main className="relative z-10 mx-auto max-w-2xl px-6 py-12 text-center">
+        {/* Logo / Icon */}
+        <div className="mb-8 flex justify-center">
+          <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-2xl shadow-indigo-500/30">
+            <span className="text-5xl">🗺️</span>
+          </div>
+        </div>
+
+        {/* Title */}
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-50 md:text-5xl">
+          Selamat Datang
+        </h1>
+        <h2 className="mb-3 text-xl font-semibold text-indigo-400 md:text-2xl">
+          SIG Desa Ujungbatu
+        </h2>
+        <p className="mb-10 text-slate-400">
+          Sistem Informasi Geografis Desa Ujungbatu, Kecamatan Jepara, Kabupaten Jepara
+        </p>
+
+        {/* Description */}
+        <div className="mb-10 rounded-2xl border border-slate-800 bg-slate-900/50 p-6 text-left backdrop-blur">
+          <p className="leading-relaxed text-slate-300">
+            Aplikasi ini menyajikan informasi spasial tentang Desa Ujungbatu secara interaktif. 
+            Jelajahi peta, lihat fasilitas umum, data penggunaan lahan, dan statistik desa.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+          {/* Pengunjung Button */}
+          <Link
+            href="/peta"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/40"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              <span className="text-xl">👤</span>
+              Masuk sebagai Pengunjung
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100" />
+          </Link>
+
+          {/* Admin Button */}
+          <Link
+            href="/admin"
+            className="group relative overflow-hidden rounded-xl border-2 border-slate-700 bg-slate-900/80 px-8 py-4 text-lg font-semibold text-slate-200 shadow-lg transition-all hover:scale-105 hover:border-slate-600 hover:bg-slate-800"
           >
-            Documentation
-          </a>
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              <span className="text-xl">🔐</span>
+              Masuk sebagai Admin
+            </span>
+          </Link>
+        </div>
+
+        {/* Footer info */}
+        <div className="mt-16 text-sm text-slate-500">
+          <p>© 2025 SIG Desa Ujungbatu</p>
+          <p className="mt-1">Universitas Islam Nahdlatul Ulama Jepara</p>
         </div>
       </main>
     </div>

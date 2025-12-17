@@ -1,5 +1,18 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Large data files (OSM shapefiles - too big for GitHub)
+/java-251211-free.shp/
+*.shp
+*.dbf
+*.shx
+*.prj
+*.cpg
+*.qpj
+
+# QGIS project files
+*.qgz
+*.qgs
+
 # dependencies
 /node_modules
 /.pnp

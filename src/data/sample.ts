@@ -1,0 +1,1067 @@
+import { FeatureCollection, MultiPolygon, MultiLineString, Point, Polygon } from "geojson";
+
+export type LayerKey =
+  | "boundary"
+  | "buildings"
+  | "settlement"
+  | "water"
+  | "roads"
+  | "facilities"
+  | "landuse";
+
+// Data akan di-load via API route untuk menghindari masalah import GeoJSON di Turbopack
+// Data batas Ujungbatu terbaru dari QGIS (batas_ujungbatu.geojson)
+export const boundary: FeatureCollection<MultiPolygon> = {
+  type: "FeatureCollection",
+  features: [],
+};
+
+export const facilities: FeatureCollection<Point, { name: string; category: string; info?: string; alamat?: string; kontak?: string; jam?: string; foto_url?: string }> = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: {
+        name: "TPI Ujungbatu",
+        category: "Belanja",
+        info: "Tempat Pelelangan Ikan Ujungbatu",
+        alamat: "Jl. Sidik Harun No.10, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/tpi_ujungbatu.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6576407737161, -6.582895109555104],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kampus 2 UNISNU Jepara",
+        category: "Pendidikan",
+        info: "Kampus 2 Universitas Islam Nahdlatul Ulama Jepara",
+        alamat: "Jl. Anton Soedjarwo, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kampus2_unisnu.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66125720401699, -6.580309816110991],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Madin Ula Salafiyah Ujungbatu",
+        category: "Pendidikan",
+        info: "Madrasah Diniyah Ula Salafiyah Ujungbatu",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/madin_ula_salafiyah.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66071601534361, -6.583474753935239],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "TK Pertiwi Ujungbatu",
+        category: "Pendidikan",
+        info: "Taman Kanak-kanak Pertiwi Ujungbatu",
+        alamat: "Jl. Kyai Ronggo Mulyo No.10, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/tk_pertiwi.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6644412394782, -6.585268716597062],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "SD Negeri 2 Ujungbatu",
+        category: "Pendidikan",
+        info: "Sekolah Dasar Negeri 2 Ujungbatu",
+        alamat: "Jl. Kyai Ronggo Mulyo No.12, Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/sd_negeri_2.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66469450979534, -6.584939189778455],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "SDN 3 Ujungbatu",
+        category: "Pendidikan",
+        info: "Sekolah Dasar Negeri 3 Ujungbatu",
+        alamat: "Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/sdn_3.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66500940003823, -6.584425423376205],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "PAUD WIJAYA KUSUMA",
+        category: "Pendidikan",
+        info: "Pendidikan Anak Usia Dini Wijaya Kusuma",
+        alamat: "RT.12 RW.01, Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/paud_wijaya_kusuma.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66803069805798, -6.582449092898214],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Musholla Al-Fatah",
+        category: "Keagamaan",
+        info: "Musholla Al-Fatah Ujungbatu",
+        alamat: "Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/musholla_alfatah.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66196179228247, -6.584330537326338],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Masjid Baitussalam",
+        category: "Keagamaan",
+        info: "Masjid Baitussalam Ujungbatu",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66366894691019, -6.5859410421293],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Musholla Al. Ikhlas",
+        category: "Keagamaan",
+        info: "Musholla Al-Ikhlas Ujungbatu",
+        alamat: "Jl. Pahlawan, Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/musholla_alikhlas.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6679959457304, -6.587872501546291],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Musholah Baitul Makmur",
+        category: "Keagamaan",
+        info: "Musholah Baitul Makmur Ujungbatu",
+        alamat: "Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/musholah_baitul_makmur.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66791621890857, -6.582778435700691],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Gereja Bethel Tabernakel Kristus Alfa Omega",
+        category: "Keagamaan",
+        info: "Gereja Bethel Tabernakel Kristus Alfa Omega Ujungbatu",
+        alamat: "Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66879778507928, -6.588304962778325],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Mushola Al Istiqlal",
+        category: "Keagamaan",
+        info: "Mushola Al Istiqlal Ujungbatu",
+        alamat: "Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6657254714544, -6.586459759017801],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Oemah khitan BPK Agus Susanto",
+        category: "Kesehatan",
+        info: "Rumah Khitan BPK Agus Susanto",
+        alamat: "RT.10 RW.04, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/oemah_khitan_agus.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.65805174783222, -6.582767019662976],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Pawang Gaib Jepara",
+        category: "Kesehatan",
+        info: "Pawang Gaib Jepara",
+        alamat: "Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/pawang_gaib_jepara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.65905024182898, -6.582616634204701],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Bidan Ika Rizqi Anjar Sari",
+        category: "Kesehatan",
+        info: "Praktek Bidan Ika Rizqi Anjar Sari",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/bidan_ika_rizqi.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66018013501484, -6.58349137679479],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Praktek Dokter Gigi & Dokter Umum ( drg. Kiki & dr. Ika )",
+        category: "Kesehatan",
+        info: "Praktek Dokter Gigi & Dokter Umum drg. Kiki & dr. Ika",
+        alamat: "Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/praktek_dokter_kiki_ika.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66111505029647, -6.583900513235867],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Apotek Dwi Farma",
+        category: "Kesehatan",
+        info: "Apotek Dwi Farma Ujungbatu",
+        alamat: "Jl. Sidik Harun No.14, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/apotek_dwi_farma.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6635721076712, -6.5850603918449275],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Indomaret Ujung Batu",
+        category: "Belanja",
+        info: "Indomaret Ujung Batu",
+        alamat: "Jl. Sidik Harun, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/indomaret_ujungbatu.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66033480106324, -6.583154664817924],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Toko jeki",
+        category: "Belanja",
+        info: "Toko Jeki Ujungbatu",
+        alamat: "RT.14 RW.04, Ujungbatu III, Jobokuto, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/toko_jeki.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66113840413887, -6.58435949669409],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Zahraashopjepara",
+        category: "Belanja",
+        info: "Zahraashopjepara",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/zahraashopjepara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66239303459422, -6.58554061875715],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Toko bu Tien",
+        category: "Belanja",
+        info: "Toko Bu Tien Ujungbatu",
+        alamat: "RT.2 RW.2, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/toko_bu_tien.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66307043728065, -6.586051004546329],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Toko Barokah Plastik",
+        category: "Belanja",
+        info: "Toko Barokah Plastik Ujungbatu",
+        alamat: "Jl. Sidik Harun, RT.03 RW.02, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/toko_barokah_plastik.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66398615342082, -6.5851999433398944],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Toko Bangunan TB Makmur Jepara",
+        category: "Belanja",
+        info: "Toko Bangunan TB Makmur Jepara",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/toko_bangunan_tb_makmur.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66449862261659, -6.585695486727698],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Asri Stiker",
+        category: "Belanja",
+        info: "Asri Stiker Ujungbatu",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/asri_stiker.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66469900855967, -6.584432921676736],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kedai Jamu PAE",
+        category: "Belanja",
+        info: "Kedai Jamu PAE Ujungbatu",
+        alamat: "Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kedai_jamu_pae.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66666507795127, -6.581952525136631],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Depot Tahu Walik Bu IDA",
+        category: "Belanja",
+        info: "Depot Tahu Walik Bu IDA Ujungbatu",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/depot_tahu_walik_bu_ida.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66220263113021, -6.585281351736322],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "AVJ VAPESTORE JEPARA",
+        category: "Belanja",
+        info: "AVJ VAPESTORE JEPARA",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/avj_vapestore.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66381227418074, -6.585167711932608],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kartini Aquafish",
+        category: "Belanja",
+        info: "Kartini Aquafish Ujungbatu",
+        alamat: "Jl. Sidik Harun, Ujungbatu, GBK, Ujung batu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kartini_aquafish.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66387610166457, -6.585024868651012],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Rusun Unisnu Jepara",
+        category: "Fasilitas Umum",
+        info: "Rumah Susun UNISNU Jepara",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/rusun_unisnu.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66029910149653, -6.580218279736763],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Taman kota jepara",
+        category: "Rekreasi",
+        info: "Taman Kota Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/taman_kota_jepara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66120918567486, -6.579789647765471],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Hutan kota jepara",
+        category: "Rekreasi",
+        info: "Hutan Kota Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/hutan_kota_jepara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66245022504114, -6.581289140479916],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "POS TNI AL JEPARA",
+        category: "Pemerintahan",
+        info: "Pos TNI AL Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/pos_tni_al.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.65900887401774, -6.582262049386837],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Rusunawa Ujungbatu",
+        category: "Fasilitas Umum",
+        info: "Rumah Susun Sederhana Sewa Ujungbatu",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/rusunawa_ujungbatu.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.65922167518202, -6.5821125900697],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Jembatan Cinta",
+        category: "Infrastruktur",
+        info: "Jembatan Cinta Ujungbatu",
+        alamat: "CM85+8VH Jemb. Cinta, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/jembatan_cinta.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.65975421911352, -6.5842272433767635],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Pemadam Kebakaran",
+        category: "Pemerintahan",
+        info: "Pemadam Kebakaran Jepara",
+        alamat: "Jl. Sidik Harun, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/pemadam_kebakaran.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66139841322747, -6.583819571938726],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kantor Ketahanan Pangan (KKP) Kabupaten Jepara",
+        category: "Pemerintahan",
+        info: "Kantor Ketahanan Pangan Kabupaten Jepara",
+        alamat: "Jl. Sidik Harun No.3A, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kantor_ketahanan_pangan.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66218099419777, -6.583619388504622],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kantor Pelayanan Pajak Daerah Kabupaten Jepara",
+        category: "Pemerintahan",
+        info: "Kantor Pelayanan Pajak Daerah Kabupaten Jepara",
+        alamat: "Jl. Sidik Harun No.3, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kantor_pajak_daerah.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66185644691183, -6.583971105200052],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Badan Pengelolaan Keuangan dan Aset Daerah (BPKAD) Kabupaten Jepara",
+        category: "Pemerintahan",
+        info: "BPKAD Kabupaten Jepara",
+        alamat: "Jl. Sidik Harun No.2, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/bpkad_jepara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6621273500236, -6.584045711745595],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kantor Kelurahan Ujungbatu",
+        category: "Pemerintahan",
+        info: "Kantor Kelurahan Ujungbatu",
+        alamat: "Jl. Sidik Harun No.3, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kantor_kelurahan_ujungbatu.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66236070220212, -6.584192260267737],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Taman Revolusi Bumi Kartini",
+        category: "Rekreasi",
+        info: "Taman Revolusi Bumi Kartini",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/taman_revolusi_bumi_kartini.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66179475610565, -6.582316435812422],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Gor Futsal GBK Jepara",
+        category: "Olahraga",
+        info: "Gor Futsal Gelora Bumi Kartini Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/gor_futsal_gbk.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66126904313799, -6.582865328365341],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Squash Court GBK, Jepara",
+        category: "Olahraga",
+        info: "Squash Court Gelora Bumi Kartini Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/squash_court_gbk.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66162387696218, -6.5830047607329245],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Taman Hutan Kota",
+        category: "Rekreasi",
+        info: "Taman Hutan Kota Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/taman_hutan_kota.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66341355611846, -6.584333497533933],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Biro STNK & SIM Jepara by ABS Loket",
+        category: "Jasa",
+        info: "Biro STNK & SIM Jepara by ABS Loket",
+        alamat: "Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/biro_stnk_sim.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.663671048182, -6.58491702653234],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "taman segitiga",
+        category: "Rekreasi",
+        info: "Taman Segitiga Ujungbatu",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/taman_segitiga.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66425845195535, -6.5850182780789925],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: 'POTONG RAMBUT ( MELEK METENG ) " Mlebu Elek Metu Ganteng "',
+        category: "Jasa",
+        info: "Potong Rambut Melek Meteng",
+        alamat: "Jl. Kyai Ronggo Mulyo, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/potong_rambut_melek_meteng.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66442743112667, -6.584770478225623],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Taman Kehati Biodiversity Park",
+        category: "Rekreasi",
+        info: "Taman Kehati Biodiversity Park Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/taman_kehati.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66333535442709, -6.582190138773001],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Sirkuit BMX Gelora Bumi Kartini",
+        category: "Olahraga",
+        info: "Sirkuit BMX Gelora Bumi Kartini Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/sirkuit_bmx_gbk.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6638388974351, -6.581392788794309],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Stadion Gelora Bumi Kartini",
+        category: "Olahraga",
+        info: "Stadion Gelora Bumi Kartini Jepara",
+        alamat: "Jl. Kyai Ronggo Mulyo, Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/stadion_gbk.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66315741066057, -6.583013814998769],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "BANASPATI SHOP",
+        category: "Belanja",
+        info: "BANASPATI SHOP Ujungbatu",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/banaspati_shop.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66446359364369, -6.582705406706681],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Lapangan Panahan Jepara",
+        category: "Olahraga",
+        info: "Lapangan Panahan Jepara",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/lapangan_panahan.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66473997441531, -6.582129961463252],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kolam Renang GBK",
+        category: "Olahraga",
+        info: "Kolam Renang Gelora Bumi Kartini",
+        alamat: "Ujungbatu II, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kolam_renang_gbk.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66501797871025, -6.581943831949911],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Samawa Wedding Organizer",
+        category: "Jasa",
+        info: "Samawa Wedding Organizer",
+        alamat: "Jl. Kyai Ronggo Mulyo No.22, Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/samawa_wedding.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66603090978188, -6.582570622123258],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Bengkel Sepeda Montor Putra Ma,e Garage",
+        category: "Jasa",
+        info: "Bengkel Sepeda Motor Putra Ma'e Garage",
+        alamat: "Unnamed Road, Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/bengkel_putra_mae.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66549079076599, -6.583534516093751],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "SPBU Pertamina Kelurahan Ujungbatu",
+        category: "Infrastruktur",
+        info: "SPBU Pertamina Kelurahan Ujungbatu",
+        alamat: "Jl. Kol. Sugiono, Kauman, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59417",
+        foto_url: "/gambar/spbu_pertamina.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6656439089579, -6.583994462988436],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "VOC Erfgoedpad-Oud Fort Japara",
+        category: "Wisata",
+        info: "VOC Erfgoedpad-Oud Fort Japara",
+        alamat: "Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/fort_japara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66603384086574, -6.585834116161389],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "RJCarWash",
+        category: "Jasa",
+        info: "RJ CarWash Ujungbatu",
+        alamat: "Jl. Kyai Ronggo Mulyo, Pengkol III, Pengkol, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/rj_carwash.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66624351413033, -6.584234174825712],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Jepara Mini Soccer",
+        category: "Olahraga",
+        info: "Jepara Mini Soccer",
+        alamat: "Jl. Kyai Ronggo Mulyo, Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/jepara_mini_soccer.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66558399232213, -6.58458397212261],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "MAKAM RONGGO MULYO",
+        category: "Makam",
+        info: "Makam Ronggo Mulyo",
+        alamat: "CM88+2C8, Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66608680938047, -6.5849312640436235],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Taman P2KH Ronggomulyo",
+        category: "Rekreasi",
+        info: "Taman P2KH Ronggomulyo",
+        alamat: "Jl. Kyai Ronggo Mulyo, Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/taman_p2kh_ronggomulyo.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66784107881071, -6.584652680853093],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Sewa Mobil & Motor (Ujung Batu Trans)",
+        category: "Jasa",
+        info: "Sewa Mobil & Motor Ujung Batu Trans",
+        alamat: "RT.014 RW.01, Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/ujung_batu_trans.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66725668580261, -6.583944425840149],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Taman Makam Pahlawan Giri Dharma Jepara",
+        category: "Makam",
+        info: "Taman Makam Pahlawan Giri Dharma Jepara",
+        alamat: "Jl. Pahlawan, Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/taman_makam_pahlawan.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6666515, -6.5860568],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kos pagar merah",
+        category: "Akomodasi",
+        info: "Kos Pagar Merah Ujungbatu",
+        alamat: "Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kos_pagar_merah.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66819251827701, -6.585401746951058],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kos 3 Saudara",
+        category: "Akomodasi",
+        info: "Kos 3 Saudara Ujungbatu",
+        alamat: "Jl. Kyai Ronggo Mulyo, RT.12 RW.01, Ujungbatu IV, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/kos_3_saudara.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66812977687289, -6.583384611530281],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "RedDoorz Syariah Near Pusat Kota Jepara",
+        category: "Akomodasi",
+        info: "RedDoorz Syariah Near Pusat Kota Jepara",
+        alamat: "Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/reddoorz_syariah.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.66008323039888, -6.583293955824711],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Makam Arimatea",
+        category: "Makam",
+        info: "Makam Arimatea Ujungbatu",
+        alamat: "Ujungbatu V, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59412",
+        foto_url: "/gambar/makam_arimatea.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6688249613452, -6.586731716526437],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Musholla Raudhlatul jannah",
+        category: "Keagamaan",
+        info: "Musholla Raudhlatul Jannah Ujungbatu",
+        alamat: "CM86+75Q, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59416",
+        foto_url: "/gambar/musholla_raudhlatul_jannah.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.6604696041868, -6.584257360093189],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Kedai Kopi & Gorengan",
+        category: "Kuliner",
+        info: "Kedai Kopi & Gorengan Pulau Panjang",
+        alamat: "Pulau Panjang, Ujungbatu I, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/kedai_kopi_gorengan.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.62953358469835, -6.577638309435628],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Wisata Pulau Panjang Jepara",
+        category: "Wisata",
+        info: "Wisata Pulau Panjang Jepara",
+        alamat: "Pulau Panjang, Ujungbatu I, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah 59418",
+        foto_url: "/gambar/wisata_pulau_panjang.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.63080722807616, -6.577381372685602],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Pulau panjang",
+        category: "Wisata",
+        info: "Pulau Panjang Ujungbatu",
+        alamat: "Pulau Panjang, Ujungbatu I, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/pulau_panjang.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.62833093222063, -6.57553961751911],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        name: "Mercusuar Pulau Panjang",
+        category: "Wisata",
+        info: "Mercusuar Pulau Panjang Jepara",
+        alamat: "Ujungbatu I, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah",
+        foto_url: "/gambar/mercusuar_pulau_panjang.jpg",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [110.62570216514537, -6.575114156123828],
+      },
+    },
+  ],
+};
+
+
+// Data bangunan dari QGIS (bangunan_ujungbatu.geojson)
+// Data akan di-load via API route
+export const buildings: FeatureCollection<MultiPolygon, { name: string; type: string; osm_id: string | null }> = {
+  type: "FeatureCollection",
+  features: [],
+};
+
+// Data pemukiman dari QGIS (pemukiman_ujungbatu.geojson)
+// Data akan di-load via API route
+export const settlement: FeatureCollection<MultiPolygon, { name: string; remark: string }> = {
+  type: "FeatureCollection",
+  features: [],
+};
+
+// Data sungai dan rawa dari QGIS (sungai_rawa_ujungbatu.geojson)
+// Data akan di-load via API route
+export const water: FeatureCollection<MultiPolygon, { name: string; type: string; fclass: string }> = {
+  type: "FeatureCollection",
+  features: [],
+};
+
+// Data penggunaan lahan dari POI (poi_ujungbatu.geojson)
+// Data akan di-load via API route
+export const landuse: FeatureCollection<MultiPolygon, { class: string; fclass?: string; name?: string; osm_id?: string }> = {
+  type: "FeatureCollection",
+  features: [],
+};
+
+
+// Data jalan dari QGIS (jalan_ujungbatu.geojson)
+// Data akan di-load via API route
+export const roads: FeatureCollection<MultiLineString> = {
+  type: "FeatureCollection",
+  features: [],
+};
+
+export const layerOrder: LayerKey[] = ["boundary", "buildings", "settlement", "water", "roads", "landuse", "facilities"];
+

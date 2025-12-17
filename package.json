@@ -1,5 +1,5 @@
 {
-  "name": "temp",
+  "name": "sig-ujungbatu",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,24 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@react-google-maps/api": "^2.20.7",
+    "@turf/area": "^7.3.1",
+    "@turf/helpers": "^7.3.1",
+    "@turf/length": "^7.3.1",
+    "@types/leaflet": "^1.9.21",
+    "leaflet": "^1.9.4",
     "next": "16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "react-hook-form": "^7.68.0",
+    "react-hot-toast": "^2.6.0",
+    "react-leaflet": "^5.0.0",
+    "zod": "^4.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/google.maps": "^3.58.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
