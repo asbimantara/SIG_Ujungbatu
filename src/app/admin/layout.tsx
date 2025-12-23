@@ -14,6 +14,12 @@ export default function AdminLayoutWrapper({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Redirect to /peta if on production (Vercel)
+    if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' || process.env.VERCEL) {
+      router.replace('/peta');
+      return;
+    }
+
     // Check if user is authenticated
     const checkAuth = () => {
       const session = localStorage.getItem("admin-session");
@@ -39,7 +45,7 @@ export default function AdminLayoutWrapper({
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [router]);
 
   if (isLoading) {
     return (
@@ -81,7 +87,7 @@ function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
       <div className="glass w-full max-w-md rounded-2xl border border-slate-800 p-8 shadow-2xl">
         <h1 className="mb-2 text-2xl font-semibold text-slate-100">Admin Login</h1>
         <p className="mb-6 text-sm text-slate-400">Masukkan password untuk mengakses admin panel</p>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="password" className="mb-2 block text-sm font-medium text-slate-300">
@@ -98,7 +104,7 @@ function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
             />
             {error && <p className="mt-1 text-sm text-red-400">{error}</p>}
           </div>
-          
+
           <button
             type="submit"
             disabled={isLoading || !password}
@@ -107,7 +113,7 @@ function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
             {isLoading ? "Memproses..." : "Masuk"}
           </button>
         </form>
-        
+
         <p className="mt-4 text-center text-xs text-slate-500">
           Password default: <code className="rounded bg-slate-800 px-1 py-0.5">admin123</code>
         </p>

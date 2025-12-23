@@ -1229,46 +1229,6 @@
           -6.575114156123828
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "facility-1765831814405-l0hb6p2ea",
-        "name": "contoh",
-        "category": "Wisata",
-        "info": "",
-        "alamat": "sdafasf",
-        "kontak": "sadf",
-        "jam": "sdfsad",
-        "foto_url": "/gambar/1765831784268_zisizi-sendok-takar-ukur-cup-measuring-spoon-4-pcs-cf234.jpeg"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          110.6272888183321,
-          -6.574760956433838
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "facility-1765868858081-78ouqiqzf",
-        "name": "sdasfads",
-        "category": "Pendidikan",
-        "info": "",
-        "alamat": "sadsaf",
-        "kontak": "dsfas",
-        "jam": "dsfasd",
-        "foto_url": ""
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          110.62861919392165,
-          -6.57472086294004
-        ]
-      }
     }
   ]
 }

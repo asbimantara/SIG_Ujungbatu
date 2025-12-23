@@ -70,6 +70,14 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  // Disable write operations in production (Vercel)
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      { error: "API dalam mode read-only di production" },
+      { status: 403 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { layer, data } = body;
@@ -136,6 +144,14 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
+  // Disable write operations in production (Vercel)
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      { error: "API dalam mode read-only di production" },
+      { status: 403 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { layer, id, data } = body;
@@ -180,9 +196,9 @@ export async function PUT(request: Request) {
       },
       geometry: data.coordinates
         ? {
-            type: "Point" as const,
-            coordinates: [data.coordinates.lng, data.coordinates.lat],
-          }
+          type: "Point" as const,
+          coordinates: [data.coordinates.lng, data.coordinates.lat],
+        }
         : existingFeature.geometry,
     };
 
@@ -204,6 +220,14 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+  // Disable write operations in production (Vercel)
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      { error: "API dalam mode read-only di production" },
+      { status: 403 }
+    );
+  }
+
   try {
     const { searchParams } = new URL(request.url);
     const layer = searchParams.get("layer");
