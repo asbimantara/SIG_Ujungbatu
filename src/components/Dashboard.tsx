@@ -20,8 +20,8 @@ export function Dashboard() {
     async function loadData() {
       try {
         const [facilitiesRes, landuseRes] = await Promise.all([
-          fetch("/api/data?layer=facilities"),
-          fetch("/api/data/load?layer=landuse"),
+          fetch("/data/facilities.json"),
+          fetch("/data/poi_ujungbatu.geojson"),
         ]);
 
         if (facilitiesRes.ok) {
@@ -83,8 +83,8 @@ export function Dashboard() {
   const totalFacilities = facilities.features.length;
   const sortedCategories = Object.entries(stats.facilityByCategory).sort((a, b) => b[1] - a[1]);
   const topCategory = sortedCategories[0];
-  const maleToFemaleRatio = stats.population.perempuan > 0 
-    ? (stats.population.lakiLaki / stats.population.perempuan).toFixed(2) 
+  const maleToFemaleRatio = stats.population.perempuan > 0
+    ? (stats.population.lakiLaki / stats.population.perempuan).toFixed(2)
     : "0";
 
   return (
@@ -99,7 +99,7 @@ export function Dashboard() {
           <div className="mb-4 text-3xl font-semibold text-slate-100">
             {totalFacilities}
           </div>
-          
+
           {/* Progress bar untuk kategori teratas */}
           {topCategory && (
             <div className="mb-3">
@@ -154,7 +154,7 @@ export function Dashboard() {
             {stats.totalLanduse > 0 ? stats.totalLanduse.toFixed(2) : "0.00"}{" "}
             <span className="text-sm font-normal text-slate-400">ha</span>
           </div>
-          
+
           {stats.totalLanduse > 0 ? (
             <div className="space-y-2 text-xs">
               {Object.entries(stats.landuseByClass)
@@ -195,7 +195,7 @@ export function Dashboard() {
             {stats.population.total > 0 ? stats.population.total.toLocaleString("id-ID") : "-"}
             <span className="text-sm font-normal text-slate-400"> jiwa</span>
           </div>
-          
+
           {stats.population.total > 0 && (
             <div className="space-y-3">
               {/* Gender breakdown dengan progress bar */}
@@ -213,7 +213,7 @@ export function Dashboard() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <div className="mb-2 flex items-center justify-between text-xs">
                   <span className="text-slate-400">Perempuan</span>
@@ -239,7 +239,7 @@ export function Dashboard() {
               </div>
             </div>
           )}
-          
+
           {stats.population.total === 0 && (
             <div className="py-4 text-center text-xs text-slate-500 italic">
               Data penduduk belum diinput

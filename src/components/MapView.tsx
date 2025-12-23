@@ -182,11 +182,11 @@ export function MapView({
     facilities: false,
   });
   const [searchLocation, setSearchLocation] = useState<[number, number] | null>(null);
-  
+
   // State untuk warning message (untuk checkbox di sidebar)
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
   const [warningCategory, setWarningCategory] = useState<string | null>(null);
-  
+
   // State untuk kategori fasilitas - gunakan external jika ada, jika tidak gunakan internal
   const [internalFacilityCategories, setInternalFacilityCategories] = useState<Record<string, boolean>>({
     Pendidikan: false,
@@ -208,7 +208,7 @@ export function MapView({
   const facilityCategories = externalFacilityCategories || internalFacilityCategories;
   const setFacilityCategories = externalSetFacilityCategories || setInternalFacilityCategories;
   const activeFacilities = externalActiveFacilities !== undefined ? externalActiveFacilities : active.facilities;
-  
+
   const handleSetActiveFacilities = (value: boolean) => {
     if (externalSetActiveFacilities) {
       externalSetActiveFacilities(value);
@@ -216,7 +216,7 @@ export function MapView({
       setActive((prev) => ({ ...prev, facilities: value }));
     }
   };
-  
+
   // Effect untuk handle highlight location dari FacilityList
   useEffect(() => {
     if (highlightLocation) {
@@ -224,7 +224,7 @@ export function MapView({
       setSearchLocation(highlightLocation);
     }
   }, [highlightLocation]);
-  
+
   // State untuk data yang di-load via API
   const [loadedBoundary, setLoadedBoundary] = useState<FeatureCollection<MultiPolygon>>(boundary);
   const [loadedBuildings, setLoadedBuildings] = useState<FeatureCollection<MultiPolygon>>(buildings);
@@ -234,52 +234,51 @@ export function MapView({
   const [loadedLanduse, setLoadedLanduse] = useState<FeatureCollection<MultiPolygon>>(landuse);
   const [loadedFacilities, setLoadedFacilities] = useState<FeatureCollection<Point>>(facilities);
 
-  // Load data via API saat component mount
+  // Load data via direct static file fetch (works on Vercel)
   useEffect(() => {
     async function loadData() {
       try {
-        // Load boundary FIRST (prioritas tinggi karena default aktif)
-        const boundaryRes = await fetch("/api/data/load?layer=boundary");
+        // Load all layers from static files in parallel
+        const [boundaryRes, buildingsRes, settlementRes, waterRes, roadsRes, landuseRes, facilitiesRes] = await Promise.all([
+          fetch("/data/batas_ujungbatu.geojson"),
+          fetch("/data/bangunan_ujungbatu.geojson"),
+          fetch("/data/pemukiman_ujungbatu.geojson"),
+          fetch("/data/sungai_rawa_ujungbatu.geojson"),
+          fetch("/data/jalan_ujungbatu.geojson"),
+          fetch("/data/poi_ujungbatu.geojson"),
+          fetch("/data/facilities.json"),
+        ]);
+
         if (boundaryRes.ok) {
           const boundaryData = await boundaryRes.json();
           setLoadedBoundary(boundaryData);
         }
-        
-        // Load other layers in parallel
-        const [buildingsRes, settlementRes, waterRes, roadsRes, landuseRes, facilitiesRes] = await Promise.all([
-          fetch("/api/data/load?layer=buildings"),
-          fetch("/api/data/load?layer=settlement"),
-          fetch("/api/data/load?layer=water"),
-          fetch("/api/data/load?layer=roads"),
-          fetch("/api/data/load?layer=landuse"),
-          fetch("/api/data?layer=facilities"), // Load facilities dari API
-        ]);
-        
+
         if (buildingsRes.ok) {
           const buildingsData = await buildingsRes.json();
           setLoadedBuildings(buildingsData);
         }
-        
+
         if (settlementRes.ok) {
           const settlementData = await settlementRes.json();
           setLoadedSettlement(settlementData);
         }
-        
+
         if (waterRes.ok) {
           const waterData = await waterRes.json();
           setLoadedWater(waterData);
         }
-        
+
         if (roadsRes.ok) {
           const roadsData = await roadsRes.json();
           setLoadedRoads(roadsData);
         }
-        
+
         if (landuseRes.ok) {
           const landuseData = await landuseRes.json();
           setLoadedLanduse(landuseData);
         }
-        
+
         if (facilitiesRes.ok) {
           const facilitiesData = await facilitiesRes.json();
           setLoadedFacilities(facilitiesData);
@@ -288,7 +287,7 @@ export function MapView({
         console.error("Error loading GeoJSON data:", error);
       }
     }
-    
+
     loadData();
   }, []);
 
@@ -305,14 +304,14 @@ export function MapView({
           {layerOrder.map((key) => {
             // Untuk checkbox "Fasilitas", tambahkan logika disable jika ada kategori yang terceklis
             const isFacilitiesDisabled = key === "facilities" && Object.values(facilityCategories).some((checked) => checked);
-            
+
             return (
               <div key={key} className="relative">
                 <label
                   className={`flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2 ${isFacilitiesDisabled ? "opacity-60" : "cursor-pointer"}`}
                 >
                   <span>{layerNames[key]}</span>
-                  <div 
+                  <div
                     className="relative"
                     onClick={(e) => {
                       // Jika checkbox disabled dan user klik, tampilkan warning
@@ -348,7 +347,7 @@ export function MapView({
                       disabled={isFacilitiesDisabled}
                       onChange={(e) => {
                         const newValue = e.target.checked;
-                        
+
                         // Jika user mencoba mengeklik "Fasilitas" padahal ada kategori yang terceklis
                         if (key === "facilities" && newValue && Object.values(facilityCategories).some((checked) => checked)) {
                           setWarningCategory(null);
@@ -360,15 +359,15 @@ export function MapView({
                           e.preventDefault();
                           return;
                         }
-                        
+
                         setWarningMessage(null);
                         setWarningCategory(null);
-                        
+
                         // Reset highlight ketika checkbox diubah
                         if (onResetHighlight) {
                           onResetHighlight();
                         }
-                        
+
                         // Jika facilities, gunakan handleSetActiveFacilities
                         if (key === "facilities") {
                           handleSetActiveFacilities(newValue);
@@ -408,7 +407,7 @@ export function MapView({
             );
           })}
         </div>
-        
+
         {/* Legenda Warna */}
         <div className="mt-6 border-t border-slate-800 pt-4">
           <div className="mb-3 text-sm font-semibold text-slate-100">Legenda</div>
@@ -442,9 +441,9 @@ export function MapView({
               <span className="text-slate-300">Penggunaan Lahan</span>
             </div>
             <div className="flex items-center gap-2.5">
-              <div 
-                className="h-4 w-4 flex-shrink-0 border-2 border-white" 
-                style={{ 
+              <div
+                className="h-4 w-4 flex-shrink-0 border-2 border-white"
+                style={{
                   background: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)',
                   borderRadius: '50% 50% 50% 0',
                   transform: 'rotate(-45deg)'
@@ -454,7 +453,7 @@ export function MapView({
             </div>
           </div>
         </div>
-        
+
       </aside>
 
       <div className="relative h-[660px] overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 shadow-xl">
@@ -466,7 +465,7 @@ export function MapView({
           preferCanvas
         >
           <TileLayer url={tileUrl} attribution={tileAttr} />
-              <MapController location={highlightLocation || searchLocation} zoom={17} />
+          <MapController location={highlightLocation || searchLocation} zoom={17} />
 
           {active.boundary && (
             <GeoJSON
@@ -590,7 +589,7 @@ export function MapView({
                 const fclass = feature?.properties?.fclass || feature?.properties?.class;
                 // Styling berdasarkan fclass dari POI
                 let fillColor = "rgba(99,102,241,0.2)"; // Default blue
-                
+
                 if (fclass === "park") {
                   fillColor = "rgba(52,211,153,0.35)"; // Green for parks
                 } else if (fclass === "stadium" || fclass === "sports_centre") {
@@ -602,7 +601,7 @@ export function MapView({
                 } else if (fclass === "market_place") {
                   fillColor = "rgba(251,191,36,0.3)"; // Yellow for market
                 }
-                
+
                 return {
                   color: palette.landuseAlt,
                   weight: 1,
@@ -628,41 +627,41 @@ export function MapView({
             />
           )}
 
-              {/* Render facilities: tampilkan jika checkbox aktif ATAU jika sedang di-highlight */}
-              {(() => {
-                // Cari facility yang sedang di-highlight
-                const highlightedFacility = highlightLocation && highlightFacilityName
-                  ? loadedFacilities.features.find((f) => {
-                      const facilityPosition: [number, number] = [f.geometry.coordinates[1], f.geometry.coordinates[0]];
-                      return (
-                        Math.abs(facilityPosition[0] - highlightLocation[0]) < 0.0001 &&
-                        Math.abs(facilityPosition[1] - highlightLocation[1]) < 0.0001 &&
-                        f.properties?.name === highlightFacilityName
-                      );
-                    })
-                  : null;
+          {/* Render facilities: tampilkan jika checkbox aktif ATAU jika sedang di-highlight */}
+          {(() => {
+            // Cari facility yang sedang di-highlight
+            const highlightedFacility = highlightLocation && highlightFacilityName
+              ? loadedFacilities.features.find((f) => {
+                const facilityPosition: [number, number] = [f.geometry.coordinates[1], f.geometry.coordinates[0]];
+                return (
+                  Math.abs(facilityPosition[0] - highlightLocation[0]) < 0.0001 &&
+                  Math.abs(facilityPosition[1] - highlightLocation[1]) < 0.0001 &&
+                  f.properties?.name === highlightFacilityName
+                );
+              })
+              : null;
 
-                // Filter facilities yang akan ditampilkan
-                const facilitiesToShow = loadedFacilities.features.filter((f) => {
-                  // Jika facilities terceklis, tampilkan semua (highlight tidak ditampilkan)
-                  if (activeFacilities) {
-                    return true;
-                  }
-                  // Jika ada kategori yang terceklis, filter berdasarkan kategori (highlight tidak ditampilkan)
-                  if (Object.values(facilityCategories).some((checked) => checked)) {
-                    const category = f.properties?.category || "";
-                    return facilityCategories[category] === true;
-                  }
-                  // Jika tidak ada checkbox yang aktif, hanya tampilkan yang sedang di-highlight
-                  if (highlightedFacility && f.properties?.name === highlightedFacility.properties?.name) {
-                    return true;
-                  }
-                  return false;
-                });
+            // Filter facilities yang akan ditampilkan
+            const facilitiesToShow = loadedFacilities.features.filter((f) => {
+              // Jika facilities terceklis, tampilkan semua (highlight tidak ditampilkan)
+              if (activeFacilities) {
+                return true;
+              }
+              // Jika ada kategori yang terceklis, filter berdasarkan kategori (highlight tidak ditampilkan)
+              if (Object.values(facilityCategories).some((checked) => checked)) {
+                const category = f.properties?.category || "";
+                return facilityCategories[category] === true;
+              }
+              // Jika tidak ada checkbox yang aktif, hanya tampilkan yang sedang di-highlight
+              if (highlightedFacility && f.properties?.name === highlightedFacility.properties?.name) {
+                return true;
+              }
+              return false;
+            });
 
-                return facilitiesToShow.map((f) => {
-                  // Tentukan icon berdasarkan kategori
-                  const getFacilityIcon = (category: string) => {
+            return facilitiesToShow.map((f) => {
+              // Tentukan icon berdasarkan kategori
+              const getFacilityIcon = (category: string) => {
                 // Icon untuk Pendidikan - Biru (education)
                 if (category.toLowerCase().includes("pendidikan") || category.toLowerCase().includes("sekolah") || category.toLowerCase().includes("kampus") || category.toLowerCase().includes("madrasah") || category.toLowerCase().includes("tk") || category.toLowerCase().includes("sd") || category.toLowerCase().includes("paud")) {
                   return L.divIcon({
@@ -985,24 +984,24 @@ export function MapView({
                 });
               };
 
-                  // Cek apakah facility ini yang di-highlight
-                  const facilityPosition: [number, number] = [f.geometry.coordinates[1], f.geometry.coordinates[0]];
-                  const isHighlighted = highlightLocation && 
-                    highlightFacilityName &&
-                    Math.abs(facilityPosition[0] - highlightLocation[0]) < 0.0001 &&
-                    Math.abs(facilityPosition[1] - highlightLocation[1]) < 0.0001 &&
-                    f.properties?.name === highlightFacilityName;
+              // Cek apakah facility ini yang di-highlight
+              const facilityPosition: [number, number] = [f.geometry.coordinates[1], f.geometry.coordinates[0]];
+              const isHighlighted = highlightLocation &&
+                highlightFacilityName &&
+                Math.abs(facilityPosition[0] - highlightLocation[0]) < 0.0001 &&
+                Math.abs(facilityPosition[1] - highlightLocation[1]) < 0.0001 &&
+                f.properties?.name === highlightFacilityName;
 
-                  return (
-                    <HighlightableMarker
-                      key={f.properties?.name}
-                      facility={f}
-                      getFacilityIcon={getFacilityIcon}
-                      isHighlighted={isHighlighted || false}
-                    />
-                  );
-                });
-              })()}
+              return (
+                <HighlightableMarker
+                  key={f.properties?.name}
+                  facility={f}
+                  getFacilityIcon={getFacilityIcon}
+                  isHighlighted={isHighlighted || false}
+                />
+              );
+            });
+          })()}
 
         </MapContainer>
       </div>
