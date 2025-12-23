@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { readFileSync } from "fs";
-import { join } from "path";
 import { FeatureCollection, MultiPolygon, MultiLineString } from "geojson";
 
 export async function GET(request: Request) {
@@ -13,8 +11,8 @@ export async function GET(request: Request) {
 
   try {
     let geojson: any;
-    
-    // Baca file GeoJSON sesuai layer
+
+    // Map layer name to filename
     const fileMap: Record<string, string> = {
       boundary: "batas_ujungbatu",
       buildings: "bangunan_ujungbatu",
@@ -29,9 +27,16 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Layer tidak valid" }, { status: 400 });
     }
 
-    const filePath = join(process.cwd(), "public", "qgis", `${fileName}.geojson`);
-    const fileContents = readFileSync(filePath, "utf-8");
-    geojson = JSON.parse(fileContents);
+    // Use fetch to get static file (works on Vercel)
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+    const response = await fetch(`${baseUrl}/data/${fileName}.geojson`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${fileName}.geojson`);
+    }
+    geojson = await response.json();
 
     // Transform data sesuai layer
     if (layer === "boundary") {

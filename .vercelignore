@@ -1,0 +1,17 @@
+# Dependencies
+node_modules
+
+# Build output
+.next
+
+# IDE
+.idea
+.vscode
+
+# Misc
+*.log
+.DS_Store
+
+# Large folders not needed
+java-251211-free.shp
+qgis
