@@ -14,25 +14,19 @@ Sistem Informasi Geografis (SIG) berbasis web untuk Desa Ujungbatu, Kecamatan Je
 
 | Welcome Page | Peta Interaktif |
 |:---:|:---:|
-| ![Welcome](docs/screenshots/01_welcome.png) | ![Peta](docs/screenshots/02_peta.png) |
+| ![Welcome](docs/screenshots/laman%20pertama.png) | ![Peta](docs/screenshots/laman%20user%20peta.png) |
 
-| Multi-Layer Toggle | Popup Detail Fasilitas |
+| Popup Detail Fasilitas | Dashboard Statistik |
 |:---:|:---:|
-| ![Layers](docs/screenshots/03_peta_layers.png) | ![Popup](docs/screenshots/04_popup.png) |
-
-| Dashboard Statistik | Halaman About |
-|:---:|:---:|
-| ![Dashboard](docs/screenshots/05_dashboard.png) | ![About](docs/screenshots/06_about.png) |
+| ![Popup](docs/screenshots/laman%20user%20popup%20detail%20lokasi%20muncul%20ketika%20pinpoint%20di%20klik%20atau%20ketika%20user%20klik%20tunjukkan%20di%20peta.png) | ![Dashboard](docs/screenshots/user%20dashboard.png) |
 
 ### Panel Admin (Localhost)
 
 | Login Admin | Admin Dashboard |
 |:---:|:---:|
-| ![Admin Login](docs/screenshots/07_admin_login.png) | ![Admin Dashboard](docs/screenshots/08_admin_dashboard.png) |
+| ![Admin Login](docs/screenshots/laman%20admin%20login.png) | ![Admin Dashboard](docs/screenshots/admin%20dashboard.png) |
 
-| Daftar Fasilitas | Tambah Fasilitas |
-|:---:|:---:|
-| ![Fasilitas List](docs/screenshots/09_admin_fasilitas.png) | ![Add Facility](docs/screenshots/10_admin_tambah.png) |
+> 📁 **Lihat lebih banyak screenshot** di folder [`docs/screenshots/`](docs/screenshots/) untuk melihat semua tampilan aplikasi termasuk fitur CRUD admin, filter fasilitas, dan lainnya.
 
 ---
 
