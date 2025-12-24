@@ -14,11 +14,11 @@ Sistem Informasi Geografis (SIG) berbasis web untuk Desa Ujungbatu, Kecamatan Je
 
 | Welcome Page | Peta Interaktif |
 |:---:|:---:|
-| ![Welcome](docs/screenshots/01_welcome.png) | ![Peta](docs/screenshots/02_peta_batas_desa.png) |
+| ![Welcome](docs/screenshots/01_welcome.png) | ![Peta](docs/screenshots/02_peta.png) |
 
-| Semua Layer Aktif | Popup Fasilitas |
+| Multi-Layer Toggle | Popup Detail Fasilitas |
 |:---:|:---:|
-| ![All Layers](docs/screenshots/03_peta_all_layers.png) | ![Popup](docs/screenshots/04_peta_popup.png) |
+| ![Layers](docs/screenshots/03_peta_layers.png) | ![Popup](docs/screenshots/04_popup.png) |
 
 | Dashboard Statistik | Halaman About |
 |:---:|:---:|
@@ -32,7 +32,7 @@ Sistem Informasi Geografis (SIG) berbasis web untuk Desa Ujungbatu, Kecamatan Je
 
 | Daftar Fasilitas | Tambah Fasilitas |
 |:---:|:---:|
-| ![Fasilitas List](docs/screenshots/09_admin_fasilitas_list.png) | ![Add Facility](docs/screenshots/10_admin_add_facility.png) |
+| ![Fasilitas List](docs/screenshots/09_admin_fasilitas.png) | ![Add Facility](docs/screenshots/10_admin_tambah.png) |
 
 ---
 
