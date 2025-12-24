@@ -30,7 +30,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             </div>
             <div className="flex items-center gap-4">
               <Link
-                href="/"
+                href="/peta"
                 className="rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-sm text-slate-200 transition-colors hover:bg-slate-700"
               >
                 ← Kembali ke Peta
@@ -52,21 +52,19 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           <div className="flex space-x-1">
             <Link
               href="/admin"
-              className={`rounded-t-lg px-4 py-2 text-sm font-medium transition-colors ${
-                pathname === "/admin"
+              className={`rounded-t-lg px-4 py-2 text-sm font-medium transition-colors ${pathname === "/admin"
                   ? "bg-slate-800 text-slate-100"
                   : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
-              }`}
+                }`}
             >
               Dashboard
             </Link>
             <Link
               href="/admin/facilities"
-              className={`rounded-t-lg px-4 py-2 text-sm font-medium transition-colors ${
-                pathname?.startsWith("/admin/facilities")
+              className={`rounded-t-lg px-4 py-2 text-sm font-medium transition-colors ${pathname?.startsWith("/admin/facilities")
                   ? "bg-slate-800 text-slate-100"
                   : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
-              }`}
+                }`}
             >
               Fasilitas
             </Link>
