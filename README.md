@@ -14,7 +14,7 @@ Sistem Informasi Geografis (SIG) berbasis web untuk Desa Ujungbatu, Kecamatan Je
 
 | Welcome Page | Peta Interaktif |
 |:---:|:---:|
-| ![Welcome](docs/screenshots/laman%20pertama.png) | ![Peta](docs/screenshots/laman%20user%20peta.png) |
+| ![Welcome](docs/screenshots/laman%20welcome.png) | ![Peta](docs/screenshots/laman%20user%20peta.png) |
 
 | Popup Detail Fasilitas | Dashboard Statistik |
 |:---:|:---:|
